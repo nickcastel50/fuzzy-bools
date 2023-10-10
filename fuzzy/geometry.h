@@ -5,6 +5,7 @@
 
 #include "math.h"
 #include "aabb.h"
+#include <stdio.h>
 
 namespace fuzzybools
 {
@@ -25,6 +26,9 @@ namespace fuzzybools
 
 		uint32_t numPoints = 0;
 		uint32_t numFaces = 0;
+
+		glm::dvec3 min = glm::dvec3(DBL_MAX, DBL_MAX, DBL_MAX);
+  		glm::dvec3 max = glm::dvec3(-DBL_MAX, -DBL_MAX, -DBL_MAX);
 
 		inline void AddPoint(glm::dvec4& pt, glm::dvec3& n)
 		{
@@ -51,6 +55,10 @@ namespace fuzzybools
 			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 0] = pt.x;
 			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 1] = pt.y;
 			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 2] = pt.z;
+
+			min = glm::min(min, pt);
+  			max = glm::max(max, pt);
+
 			vertexData.push_back(pt.x);
 			vertexData.push_back(pt.y);
 			vertexData.push_back(pt.z);

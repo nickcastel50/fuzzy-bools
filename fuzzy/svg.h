@@ -49,7 +49,7 @@ namespace fuzzybools
 
 		if (width == 0 && height == 0)
 		{
-			printf("asdf");
+			//printf("asdf");
 		}
 
 		return {

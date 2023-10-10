@@ -411,7 +411,7 @@ namespace fuzzybools
 		{
 			if (a == b)
 			{
-				printf("a == b on AddSegment");
+				//printf("a == b on AddSegment");
 				return;
 			}
 
@@ -776,15 +776,15 @@ namespace fuzzybools
 
 					if (!planes[planeId].IsPointOnPlane(a))
 					{
-						printf("unexpected point on plane\n");
+						//printf("unexpected point on plane\n");
 					}
 					if (!planes[planeId].IsPointOnPlane(b))
 					{
-						printf("unexpected point on plane\n");
+						//printf("unexpected point on plane\n");
 					}
 					if (!planes[planeId].IsPointOnPlane(c))
 					{
-						printf("unexpected point on plane\n");
+						//printf("unexpected point on plane\n");
 					}
 
 					planes[planeId].AddPoint(a);
@@ -805,7 +805,7 @@ namespace fuzzybools
 				}
 				else
 				{
-					printf("Degenerate face in AddGeometry\n");
+					//printf("Degenerate face in AddGeometry\n");
 				}
 			}
 
