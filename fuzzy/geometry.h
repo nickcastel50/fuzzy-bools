@@ -5,7 +5,6 @@
 
 #include "math.h"
 #include "aabb.h"
-#include <stdio.h>
 
 namespace fuzzybools
 {
