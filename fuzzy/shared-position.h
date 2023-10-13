@@ -963,7 +963,7 @@ namespace fuzzybools
 					if (pointToProjectedPoint.count(segment.first) == 0)
 					{
 						bool expectedOnPlane = p.IsPointOnPlane(points[segment.first].location3D);
-						printf("unknown point in list, repairing");
+						//printf("unknown point in list, repairing");
 
 						pointToProjectedPoint[segment.first] = projectedPoints.size();
 						projectedPointToPoint[projectedPoints.size()] = segment.first;
@@ -972,7 +972,7 @@ namespace fuzzybools
 					if (pointToProjectedPoint.count(segment.second) == 0)
 					{
 						bool expectedOnPlane = p.IsPointOnPlane(points[segment.second].location3D);
-						printf("unknown point in list, repairing");
+						//printf("unknown point in list, repairing");
 
 						pointToProjectedPoint[segment.second] = projectedPoints.size();
 						projectedPointToPoint[projectedPoints.size()] = segment.second;
