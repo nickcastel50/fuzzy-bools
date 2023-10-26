@@ -1,10 +1,12 @@
 #pragma once
 
+#include <stdio.h>
 #include <vector>
 #include <glm/glm.hpp>
 
 #include "math.h"
 #include "aabb.h"
+
 
 namespace fuzzybools
 {
@@ -92,7 +94,7 @@ namespace fuzzybools
 			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
 			{
 				// bail out, zero area triangle
-				//printf("zero tri");
+				printf("zero tri");
 				return;
 			}
 
