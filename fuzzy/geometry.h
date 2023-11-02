@@ -94,7 +94,7 @@ namespace fuzzybools
 			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
 			{
 				// bail out, zero area triangle
-				printf("zero tri");
+			//	printf("zero tri");
 				return;
 			}
 
