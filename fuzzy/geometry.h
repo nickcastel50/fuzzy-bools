@@ -61,12 +61,12 @@ namespace fuzzybools
 
 			if (std::isnan(pt.x) || std::isnan(pt.y) || std::isnan(pt.z))
 			{
-				printf("NaN in geom!\n");
+				//printf("NaN in geom!\n");
 			}
 
 			if (std::isnan(n.x) || std::isnan(n.y) || std::isnan(n.z))
 			{
-				printf("NaN in geom!\n");
+				//printf("NaN in geom!\n");
 			}
 
 			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 3] = n.x;
@@ -85,7 +85,7 @@ namespace fuzzybools
 			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
 			{
 				// bail out, zero area triangle
-				printf("zero tri");
+				//printf("zero tri");
 				return;
 			}
 
@@ -112,7 +112,7 @@ namespace fuzzybools
 			if (!computeSafeNormal(GetPoint(a), GetPoint(b), GetPoint(c), normal))
 			{
 				// bail out, zero area triangle
-				printf("zero tri");
+				//printf("zero tri");
 			}
 
 			numFaces++;
