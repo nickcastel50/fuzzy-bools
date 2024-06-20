@@ -22,8 +22,6 @@ namespace fuzzybools
 		std::vector<float> fvertexData;
 		std::vector<double> vertexData;
 		std::vector<uint32_t> indexData;
-		uint32_t numPoints = 0;
-		uint32_t numFaces = 0;
 
 		void BuildFromVectors(std::vector<double>& d, std::vector<uint32_t>& i)
 		{
