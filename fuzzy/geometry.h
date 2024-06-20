@@ -22,6 +22,17 @@ namespace fuzzybools
 		std::vector<float> fvertexData;
 		std::vector<double> vertexData;
 		std::vector<uint32_t> indexData;
+		uint32_t numPoints = 0;
+		uint32_t numFaces = 0;
+
+		void BuildFromVectors(std::vector<double>& d, std::vector<uint32_t>& i)
+		{
+			vertexData = d;
+			indexData = i;
+
+			numPoints = indexData.size();
+			numFaces = indexData.size() / 3;
+		}
 
 		uint32_t numPoints = 0;
 		uint32_t numFaces = 0;
@@ -61,12 +72,12 @@ namespace fuzzybools
 
 			if (std::isnan(pt.x) || std::isnan(pt.y) || std::isnan(pt.z))
 			{
-				//printf("NaN in geom!\n");
+				if (messages) { printf("NaN in geom!\n"); }
 			}
 
 			if (std::isnan(n.x) || std::isnan(n.y) || std::isnan(n.z))
 			{
-				//printf("NaN in geom!\n");
+				if (messages) { printf("NaN in geom!\n"); }
 			}
 
 			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 3] = n.x;
@@ -81,11 +92,11 @@ namespace fuzzybools
 			glm::dvec3 normal;
 
 			double area = areaOfTriangle(a, b, c);
-
-			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
+//			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
+			if (!computeSafeNormal(a, b, c, normal, toleranceAddFace))
 			{
 				// bail out, zero area triangle
-				//printf("zero tri");
+				if (messages) { printf("zero triangle, AddFace(vec, vec, vec)\n"); }
 				return;
 			}
 
@@ -98,10 +109,10 @@ namespace fuzzybools
 
 		inline void AddFace(uint32_t a, uint32_t b, uint32_t c)
 		{
-			//indexData.reserve((numFaces + 1) * 3);
-			//indexData[numFaces * 3 + 0] = a;
-			//indexData[numFaces * 3 + 1] = b;
-			//indexData[numFaces * 3 + 2] = c;
+//			indexData.reserve((numFaces + 1) * 3);
+//			indexData[numFaces * 3 + 0] = a;
+//			indexData[numFaces * 3 + 1] = b;
+//			indexData[numFaces * 3 + 2] = c;
 			indexData.push_back(a);
 			indexData.push_back(b);
 			indexData.push_back(c);
@@ -109,10 +120,11 @@ namespace fuzzybools
 			double area = areaOfTriangle(GetPoint(a), GetPoint(b), GetPoint(c));
 
 			glm::dvec3 normal;
-			if (!computeSafeNormal(GetPoint(a), GetPoint(b), GetPoint(c), normal))
+//			if (!computeSafeNormal(GetPoint(a), GetPoint(b), GetPoint(c), normal, EPS_SMALL))
+			if (!computeSafeNormal(GetPoint(a), GetPoint(b), GetPoint(c), normal, toleranceAddFace))
 			{
 				// bail out, zero area triangle
-				//printf("zero tri");
+				if (messages) { printf("zero triangle, AddFace(int, int, int)\n"); }
 			}
 
 			numFaces++;
@@ -245,7 +257,8 @@ namespace fuzzybools
 
 				glm::dvec3 norm;
 
-				if (computeSafeNormal(a, b, c, norm))
+//				if (computeSafeNormal(a, b, c, norm))
+				if (computeSafeNormal(a, b, c, norm, EPS_SMALL))
 				{
 					double area = areaOfTriangle(a, b, c);
 					double height = glm::dot(norm, a);
