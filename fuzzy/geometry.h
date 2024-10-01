@@ -23,6 +23,9 @@ namespace fuzzybools
 		std::vector<double> vertexData;
 		std::vector<uint32_t> indexData;
 
+		uint32_t numPoints = 0;
+		uint32_t numFaces = 0;
+
 		void BuildFromVectors(std::vector<double>& d, std::vector<uint32_t>& i)
 		{
 			vertexData = d;
@@ -31,9 +34,6 @@ namespace fuzzybools
 			numPoints = indexData.size();
 			numFaces = indexData.size() / 3;
 		}
-
-		uint32_t numPoints = 0;
-		uint32_t numFaces = 0;
 
 		inline void AddPoint(glm::dvec4& pt, glm::dvec3& n)
 		{
@@ -56,10 +56,6 @@ namespace fuzzybools
 
 		inline void AddPoint(glm::dvec3& pt, glm::dvec3& n)
 		{
-			//vertexData.reserve((numPoints + 1) * VERTEX_FORMAT_SIZE_FLOATS);
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 0] = pt.x;
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 1] = pt.y;
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 2] = pt.z;
 			vertexData.push_back(pt.x);
 			vertexData.push_back(pt.y);
 			vertexData.push_back(pt.z);
@@ -78,10 +74,6 @@ namespace fuzzybools
 				if (messages) { printf("NaN in geom!\n"); }
 			}
 
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 3] = n.x;
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 4] = n.y;
-			//vertexData[numPoints * VERTEX_FORMAT_SIZE_FLOATS + 5] = n.z;
-
 			numPoints += 1;
 		}
 
@@ -90,7 +82,6 @@ namespace fuzzybools
 			glm::dvec3 normal;
 
 			double area = areaOfTriangle(a, b, c);
-//			if (!computeSafeNormal(a, b, c, normal, EPS_SMALL))
 			if (!computeSafeNormal(a, b, c, normal, toleranceAddFace))
 			{
 				// bail out, zero area triangle
